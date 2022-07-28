@@ -1,8 +1,8 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { changeNoteBackgroundColor, setEditNoteBackground } from '../redux/notesSlice';
+import { changeNoteBackgroundColor, setEditNoteBackground, setNewNoteBackground } from '../redux/notesSlice';
 
-function ColorList({ noteId}) {
+function ColorList({ noteId }) {
     const dispacth = useDispatch();
     const handleColorChange = (e) => {
         e.preventDefault();
@@ -11,9 +11,8 @@ function ColorList({ noteId}) {
             // change the background of the note with the selected color
             dispacth(changeNoteBackgroundColor({ id: noteId, backgroundColor }));
             return;
-        }
+        } else if (!noteId.id) dispacth(setNewNoteBackground(backgroundColor));
         dispacth(setEditNoteBackground(backgroundColor));
-
     }
 
     return (

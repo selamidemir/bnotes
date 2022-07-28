@@ -1,14 +1,14 @@
 import React, {useEffect, useState} from 'react';
 import { Offcanvas, Form, Button, Card } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
-import { addNewNote, setAddFormVisibilty, setEditedNote, saveEditedNote } from '../redux/notesSlice';
+import { addNewNote, setAddFormVisibilty, setEditedNote, saveEditedNote, setNewNoteBackground } from '../redux/notesSlice';
 import ColorList from './ColorList';
 
 
 
 function AddNoteForm() {
   const editedNote = useSelector(state => state.notes.editedNote);
-  
+
   var note = {
       id: editedNote ? editedNote.id : '',
       title: editedNote ? editedNote.title : '',
@@ -34,9 +34,10 @@ function AddNoteForm() {
     e.preventDefault();
     dispacth(setAddFormVisibilty());
     dispacth(setEditedNote(null));
+    dispacth(setNewNoteBackground(''));
     setTitle('');
     setDescription('');
-    setBackground('Gainsboro');
+    // setBackground('Gainsboro');
     setError('');
   }
 
@@ -77,7 +78,7 @@ function AddNoteForm() {
 
               
               <div className='d-flex justify-content-end'>
-                <ColorList setBackground={setBackground} />
+                <ColorList setBackground={setBackground} noteId={false} />
 
                 <Button variant='primary' className='me-2 ms-5' onClick={(e) => closeAddForm(e)}>
                   Close

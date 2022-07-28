@@ -42,6 +42,7 @@ export const notesSlice = createSlice({
         ],
         addFormVisibility: false,
         editedNote: null,
+        newNoteBackground: '',
         filter: '',
     },
     reducers: {
@@ -60,7 +61,9 @@ export const notesSlice = createSlice({
         addNewNote: (state, action) => {
             const note = action.payload;
             note.id = nanoid();
+            if(state.newNoteBackground) note.backgroundColor = state.newNoteBackground;
             state.items.push(note);
+            state.newNoteBackground = '';
         },
         setEditedNote: (state, action) => {
             if(action.payload === null) {
@@ -80,6 +83,9 @@ export const notesSlice = createSlice({
         },
         setEditNoteBackground: (state, action) => {
             if(state.editedNote) state.editedNote.backgroundColor = action.payload;
+        },
+        setNewNoteBackground: (state, action) => {
+            state.newNoteBackground = action.payload;
         }
         
     },
@@ -90,5 +96,5 @@ export const selectNotes = state => {
     return state.notes.items.filter(note => note.title.toLowerCase().includes(state.notes.filter));
     // state.notes.items.map(note => console.log(note.title.includes("l")))
 };
-export const { changeNoteBackgroundColor, deleteNote, setAddFormVisibilty, addNewNote, setEditedNote, saveEditedNote, setFilterNotes, setEditNoteBackground } = notesSlice.actions;
+export const { changeNoteBackgroundColor, deleteNote, setAddFormVisibilty, addNewNote, setEditedNote, saveEditedNote, setFilterNotes, setEditNoteBackground, setNewNoteBackground } = notesSlice.actions;
 export default notesSlice.reducer;
