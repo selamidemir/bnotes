@@ -1,32 +1,39 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import { Offcanvas, Form, Button, Card } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
-import { addNewNote, setAddFormVisibilty } from '../redux/notesSlice';
+import { addNewNote, setAddFormVisibilty, setEditedNote, saveEditedNote } from '../redux/notesSlice';
 import ColorList from './ColorList';
 
 
 
-function AddNoteForm({note}) {
-  if(!note) {
-    note = {
-      title: '',
-      description: '',
-      backgroundColor: 'white',
+function AddNoteForm() {
+  const editedNote = useSelector(state => state.notes.editedNote);
+  
+  var note = {
+      id: editedNote ? editedNote.id : '',
+      title: editedNote ? editedNote.title : '',
+      description: editedNote ? editedNote.description : '',
+      backgroundColor: editedNote ? editedNote.backgroundColor : 'pink',
     }
-  }
 
   const formVisibility = useSelector(state => state.notes.addFormVisibility);
   const dispacth = useDispatch();
+
   const [background, setBackground] = useState(note.backgroundColor);
   const [title, setTitle] = useState(note.title);
-  const [description, setDescription] = useState(note.description);
+  const [description, setDescription] = useState('');
   const [error, setError] = useState('');
+  
+  useEffect(() => {
+    setTitle(note.title);
+    setDescription(note.description);
+    setBackground(note.backgroundColor);
+  }, [note.title, note.description, note.backgroundColor]);
 
-
-
-  const changeAddFormVisibility = (e) => {
+  const closeAddForm = (e) => {
     e.preventDefault();
     dispacth(setAddFormVisibilty());
+    dispacth(setEditedNote(null));
     setTitle('');
     setDescription('');
     setBackground('white');
@@ -40,13 +47,13 @@ function AddNoteForm({note}) {
       return;
     }
 
-    const note = {
+    note = { ...note,
       title: title,
       description: description,
       backgroundColor: background,
     }
-    dispacth(addNewNote(note));
-    changeAddFormVisibility(e);
+    editedNote ? dispacth(saveEditedNote(note)) : dispacth(addNewNote(note));
+    closeAddForm(e);
   });
 
   return (
@@ -71,12 +78,12 @@ function AddNoteForm({note}) {
               <div className='d-flex justify-content-end'>
                 <ColorList setBackground={setBackground} />
 
-                <Button variant='primary' className='me-2 ms-5' onClick={(e) => changeAddFormVisibility(e)}>
+                <Button variant='primary' className='me-2 ms-5' onClick={(e) => closeAddForm(e)}>
                   Close
                 </Button>
 
                 <Button variant="primary" type="submit">
-                  Add Node
+                  { note.id ? 'Save' : 'Add Node' }
                 </Button>
               </div>
             </Form>

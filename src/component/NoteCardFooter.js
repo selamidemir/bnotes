@@ -1,6 +1,6 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { deleteNote } from '../redux/notesSlice';
+import { deleteNote, setAddFormVisibilty, setEditedNote } from '../redux/notesSlice';
 import { Pencil, Trash3 } from 'react-bootstrap-icons';
 import ColorList from './ColorList';
 
@@ -13,7 +13,8 @@ function NoteCardFooter({ noteId }) {
 
     const handleEdit = (e) => {
         e.preventDefault();
-        
+        dispacth(setEditedNote(noteId));
+        dispacth(setAddFormVisibilty());        
     }
 
     return (
