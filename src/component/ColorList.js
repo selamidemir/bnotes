@@ -1,8 +1,8 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { changeNoteBackgroundColor } from '../redux/notesSlice';
+import { changeNoteBackgroundColor, setEditNoteBackground } from '../redux/notesSlice';
 
-function ColorList({ noteId, setBackground }) {
+function ColorList({ noteId}) {
     const dispacth = useDispatch();
     const handleColorChange = (e) => {
         e.preventDefault();
@@ -12,25 +12,25 @@ function ColorList({ noteId, setBackground }) {
             dispacth(changeNoteBackgroundColor({ id: noteId, backgroundColor }));
             return;
         }
-        // will create new note
-        setBackground(backgroundColor);
+        dispacth(setEditNoteBackground(backgroundColor));
+
     }
 
     return (
         <div>
-            <button className="rounded-circle color-button" data-color="pink" style={{ backgroundColor: 'pink' }} onClick={e => handleColorChange(e)}>
+            <button className="rounded-circle color-button" data-color="Gainsboro" style={{ backgroundColor: 'Gainsboro' }} onClick={e => handleColorChange(e)}>
             </button>
 
-            <button className="rounded-circle color-button" data-color="lightblue" style={{ backgroundColor: 'lightblue' }} onClick={e => handleColorChange(e)}>
+            <button className="rounded-circle color-button" data-color="Bisque" style={{ backgroundColor: 'Bisque' }} onClick={e => handleColorChange(e)}>
             </button>
 
-            <button className="rounded-circle color-button" data-color="lightcyan" style={{ backgroundColor: 'lightcyan' }} onClick={e => handleColorChange(e)}>
+            <button className="rounded-circle color-button" data-color="LightCyan" style={{ backgroundColor: 'LightCyan' }} onClick={e => handleColorChange(e)}>
             </button>
 
-            <button className="rounded-circle color-button" data-color="lightgoldenrodyellow" style={{ backgroundColor: 'lightgoldenrodyellow' }} onClick={e => handleColorChange(e)}>
+            <button className="rounded-circle color-button" data-color="MistyRose" style={{ backgroundColor: 'MistyRose' }} onClick={e => handleColorChange(e)}>
             </button>
 
-            <button className="rounded-circle color-button" data-color="lightslategray" style={{ backgroundColor: 'lightslategray' }} onClick={e => handleColorChange(e)}>
+            <button className="rounded-circle color-button" data-color="Lavender" style={{ backgroundColor: 'Lavender' }} onClick={e => handleColorChange(e)}>
             </button>
         </div>
     );

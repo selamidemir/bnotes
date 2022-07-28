@@ -7,7 +7,6 @@ import { selectNotes } from '../redux/notesSlice';
 
 function NotesList() {
   const notes = useSelector(selectNotes);
-
   return (
     <Container className='my-2'>
       <Row>

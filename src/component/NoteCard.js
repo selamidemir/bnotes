@@ -4,7 +4,7 @@ import NoteCardFooter from './NoteCardFooter';
 
 function NoteCard({note}) {
   return (
-    <Card style={{ width: '23rem', height: '13rem', maxHeight: '13rem', backgroundColor: note.backgroundColor, overflow: 'hidden' }} className="d-inline-block m-1 shadow">
+    <Card style={{ width: '23rem', height: '13rem', maxHeight: '13rem', backgroundColor: note.backgroundColor, overflow: 'hidden' }} className="d-inline-block m-3 shadow">
     <Card.Body>
       <Card.Title>{note.title}</Card.Title>
       <Card.Text style={{overflow: 'auto', height: '6rem', maxHeight: '6rem'}}>

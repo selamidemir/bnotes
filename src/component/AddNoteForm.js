@@ -13,7 +13,7 @@ function AddNoteForm() {
       id: editedNote ? editedNote.id : '',
       title: editedNote ? editedNote.title : '',
       description: editedNote ? editedNote.description : '',
-      backgroundColor: editedNote ? editedNote.backgroundColor : 'pink',
+      backgroundColor: editedNote ? editedNote.backgroundColor : 'Gainsboro',
     }
 
   const formVisibility = useSelector(state => state.notes.addFormVisibility);
@@ -36,7 +36,7 @@ function AddNoteForm() {
     dispacth(setEditedNote(null));
     setTitle('');
     setDescription('');
-    setBackground('white');
+    setBackground('Gainsboro');
     setError('');
   }
 
@@ -50,8 +50,9 @@ function AddNoteForm() {
     note = { ...note,
       title: title,
       description: description,
-      backgroundColor: background,
+      backgroundColor: editedNote ? editedNote.backgroundColor : background,
     }
+
     editedNote ? dispacth(saveEditedNote(note)) : dispacth(addNewNote(note));
     closeAddForm(e);
   });
