@@ -20,7 +20,7 @@ function Header() {
     return (
         <Navbar bg="dark" expand="lg">
             <Container>
-                <Navbar.Brand href="/#" className="ms-5" style={{ color: 'white' }}><JournalCheck className='text-info' />Notes</Navbar.Brand>
+                <Navbar.Brand href="/#" className="ms-5" style={{ color: 'white' }}><JournalCheck className='text-info' />BNotes</Navbar.Brand>
                 <Navbar.Toggle aria-controls="navbarScroll" />
                 <Navbar.Collapse id="navbarScroll">
                     <Nav

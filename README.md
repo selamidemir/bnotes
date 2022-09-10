@@ -1,4 +1,4 @@
-# React ve Redux İle Not Alma Uygulaması
+# BNotes is a Note App
 
 Patika, Redux dersi React ve Redux ile not alma uygulaması. Uygulamada **React Js** ile birlikte **Redux**, **React Bootstrap** kütüphaneleri kullanılmıştır.
 
